@@ -70,6 +70,7 @@ class LoadingButton @JvmOverloads constructor(
         textSize = 55.0f
         typeface = Typeface.create("", Typeface.BOLD)
     }
+
     @Volatile
     var animationProgress = 0.0f
 
@@ -84,6 +85,7 @@ class LoadingButton @JvmOverloads constructor(
 
         }
     }
+
     override fun performClick(): Boolean {
         super.performClick()
 

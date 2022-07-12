@@ -14,18 +14,21 @@
     <string name="download_text">Download</string>
     <string name="downloading_text">Downloading</string>
     <string name="go_to_details">Go to details</string>
+
     <string name="download_repository_channel_id">default_channel</string>
     <string name="navigate_back">Go back</string>
     <string name="status_caption">Status:</string>
     <string name="file_name">File:</string>
     <string name="download_notification_channel_description">Download complete</string>
     <string name="download_notification_channel_name" translatable="true">Downloader</string>
+
     <string name="retrofit_link_label">Retrofit Library</string>
     <string name="retrofit_link">https://github.com/square/retrofit/archive/master.zip</string>
     <string name="glide_link">https://github.com/bumptech/glide/archive/master.zip</string>
     <string name="glide_link_label">Glide Library</string>
     <string name="C3_project_link">https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip</string>
     <string name="C3_project_link_label">Udacity Project C3</string>
+
     <string name="descr_download">Select a link to download</string>
     <string name="background_for_banner">Background for banner</string>
     <string name="the_download_image">Download image</string>
