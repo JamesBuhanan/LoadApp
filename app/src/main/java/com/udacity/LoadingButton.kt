@@ -1,6 +1,7 @@
 package com.udacity
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
@@ -21,21 +22,21 @@ class LoadingButton @JvmOverloads constructor(
 
     private val buttonAnimator = ValueAnimator()
 
-    private val downloadText = "Download"
-    private val loadingText = "Downloading"
+    private val downloadText = context.getString(R.string.download_text)
+    private val loadingText = context.getString(R.string.downloading_text)
 
     val TAG = "LoadingButton"
 
-    var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { prop, old, new ->
+    var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { _, _, new ->
 
-//        when (new) {
-//            ButtonState.Loading -> {
-//                startTheAnimation()
-//            }
-//            ButtonState.Completed -> {
-//                stopAnimation()
-//            }
-//        }
+        when (new) {
+            ButtonState.Loading -> {
+                startTheAnimation()
+            }
+            ButtonState.Completed -> {
+                stopAnimation()
+            }
+        }
     }
 
     private fun stopAnimation() {
@@ -83,8 +84,14 @@ class LoadingButton @JvmOverloads constructor(
 
         }
     }
+    override fun performClick(): Boolean {
+        super.performClick()
 
+        invalidate()
+        return true
+    }
 
+    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         paint.color = buttonBackgroundColor
@@ -93,12 +100,12 @@ class LoadingButton @JvmOverloads constructor(
         val buttonText = if (buttonState == ButtonState.Loading) loadingText else downloadText
 
         if (buttonState == ButtonState.Loading) {
-            paint.color = Color.BLUE
+            paint.color = Color.DKGRAY
             canvas?.drawRect(
                 0f, 0f,
                 ((animationProgress)).toFloat(), heightSize.toFloat(), paint
             )
-            paint.color = Color.GREEN
+            paint.color = Color.WHITE
             canvas?.drawArc(
                 RectF(
                     (heightSize / 16).toFloat(),
