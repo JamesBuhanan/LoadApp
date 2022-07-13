@@ -14,16 +14,16 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        fab.setOnClickListener {
-            finish()
-        }
-
         val notificationManager =
             ContextCompat.getSystemService(
                 applicationContext,
                 NotificationManager::class.java
             ) as NotificationManager
         notificationManager.cancelNotifications()
+
+        fab.setOnClickListener {
+            finish()
+        }
 
         val filename: String? = intent.getStringExtra(FILE_NAME)
         val status: String? = intent.getStringExtra(STATUS)

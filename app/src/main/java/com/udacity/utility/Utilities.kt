@@ -43,7 +43,7 @@ fun NotificationManager.sendNotification(
 
     val builder = NotificationCompat.Builder(
         applicationContext,
-        applicationContext.getString(R.string.download_repository_channel_id)
+        applicationContext.getString(R.string.channel_id)
     )
 
         .setSmallIcon(R.drawable.download_icon)
