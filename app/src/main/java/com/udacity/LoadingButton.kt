@@ -13,13 +13,13 @@ import kotlin.properties.Delegates
 class LoadingButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
-    private var widthSize = 0
-    private var heightSize = 0
     private val buttonAnimator = ValueAnimator()
     private var buttonBackgroundColor = 0
     private var buttonTextColor = 0
     private val loadingText = context.getString(R.string.downloading_text)
     private val downloadText = context.getString(R.string.download_text)
+    private var widthOrigin = 0
+    private var heightOrigin = 0
 
     var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { _, _, new ->
 
@@ -35,7 +35,7 @@ class LoadingButton @JvmOverloads constructor(
 
     private fun startTheAnimation() {
         buttonAnimator.apply {
-            setFloatValues(0f, widthSize.toFloat())
+            setFloatValues(0f, widthOrigin.toFloat())
             duration = 3000
             addUpdateListener { valueAnimator ->
                 valueAnimator.apply {
@@ -79,7 +79,7 @@ class LoadingButton @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         paint.color = buttonBackgroundColor
-        canvas?.drawRect(0f, 0f, widthSize.toFloat(), heightSize.toFloat(), paint)
+        canvas?.drawRect(0f, 0f, widthOrigin.toFloat(), heightOrigin.toFloat(), paint)
 
         val buttonText = if (buttonState == ButtonState.Loading) loadingText else downloadText
 
@@ -89,25 +89,25 @@ class LoadingButton @JvmOverloads constructor(
                 0f,
                 0f,
                 animationProgress,
-                heightSize.toFloat(),
+                heightOrigin.toFloat(),
                 paint
             )
             paint.color = Color.WHITE
             canvas?.drawArc(
                 RectF(
-                    (heightSize / 20).toFloat(),
-                    (heightSize / 20).toFloat(),
-                    (heightSize * 16 / 20).toFloat(),
-                    (heightSize * 16 / 20).toFloat()
+                    (widthOrigin - 225).toFloat(),
+                    (heightOrigin / 14).toFloat(),
+                    (widthOrigin * 16 / 17).toFloat(),
+                    (heightOrigin * 16 / 17).toFloat()
                 ), 0f,
-                -360 * (animationProgress / widthSize), true, paint
+                -360 * (animationProgress / widthOrigin), true, paint
             )
         }
         paint.color = buttonTextColor
         canvas?.drawText(
             buttonText,
-            (widthSize / 2).toFloat(),
-            (heightSize / 2 + 20).toFloat(),
+            (widthOrigin / 2).toFloat(),
+            (heightOrigin / 2 + 20).toFloat(),
             paint
         )
     }
@@ -120,8 +120,8 @@ class LoadingButton @JvmOverloads constructor(
             heightMeasureSpec,
             0
         )
-        widthSize = w
-        heightSize = h
+        heightOrigin = h
+        widthOrigin = w
         setMeasuredDimension(w, h)
     }
 
