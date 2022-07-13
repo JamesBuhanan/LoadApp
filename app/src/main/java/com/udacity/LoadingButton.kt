@@ -25,7 +25,7 @@ class LoadingButton @JvmOverloads constructor(
 
         when (new) {
             ButtonState.Loading -> {
-                startTheAnimation()
+                startAnimation()
             }
             ButtonState.Completed -> {
                 stopAnimation()
@@ -33,7 +33,7 @@ class LoadingButton @JvmOverloads constructor(
         }
     }
 
-    private fun startTheAnimation() {
+    private fun startAnimation() {
         buttonAnimator.apply {
             setFloatValues(0f, widthOrigin.toFloat())
             duration = 3000
